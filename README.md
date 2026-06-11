@@ -17,14 +17,12 @@ It does two things:
 
 ## Download
 
-1. Go to the [Actions tab](../../actions) of this repo.
-2. Open the most recent **Build extension** run.
-3. Download the **itvx-black-screen-fix** artifact (a zip file) from the bottom of the run page.
-4. Unzip it somewhere permanent (Chrome loads the extension from this folder, so don't delete it).
+**Easiest:** grab `itvx-black-screen-fix.zip` from the [latest release](../../releases/latest) — no GitHub account needed. Unzip it somewhere permanent (Chrome loads the extension from this folder, so don't delete it).
 
-> **Note:** you need to be signed in to GitHub to download workflow artifacts.
+Alternatives:
 
-Alternatively, clone this repo — the extension files are at the repo root.
+- Download the **itvx-black-screen-fix** artifact from the most recent [Actions run](../../actions) (requires being signed in to GitHub).
+- Clone this repo — the extension files are at the repo root.
 
 ## Install in Chrome
 
