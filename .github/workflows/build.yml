@@ -1,0 +1,24 @@
+name: Build extension
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Package extension
+        run: |
+          mkdir -p dist
+          zip -r dist/itvx-black-screen-fix.zip manifest.json fix.css background.js
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: itvx-black-screen-fix
+          path: dist/itvx-black-screen-fix.zip

@@ -1,0 +1,6 @@
+/* A near-invisible filter disqualifies the video from Chrome's hardware
+   overlay rendering path, which is what breaks on external displays.
+   The video is then composited as a normal GPU texture instead. */
+video {
+  filter: brightness(1.001) !important;
+}

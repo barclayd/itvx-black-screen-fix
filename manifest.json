@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "ITVX Black Screen Fix",
+  "version": "1.0",
+  "description": "Fixes the black video player on ITVX when using an external display, by keeping the video off Chrome's hardware overlay path.",
+  "content_scripts": [
+    {
+      "matches": ["*://www.itv.com/*"],
+      "css": ["fix.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Fix ITVX black screen (click if the picture goes black)"
+  },
+  "permissions": ["activeTab", "scripting"]
+}
