@@ -5,6 +5,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   package:
     runs-on: ubuntu-latest
@@ -15,10 +18,26 @@ jobs:
       - name: Package extension
         run: |
           mkdir -p dist
-          zip -r dist/itvx-black-screen-fix.zip manifest.json fix.css background.js
+          zip -j dist/itvx-black-screen-fix.zip manifest.json fix.css background.js
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: itvx-black-screen-fix
           path: dist/itvx-black-screen-fix.zip
+
+      - name: Release if manifest version is new
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(jq -r .version manifest.json)
+          TAG="v$VERSION"
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            echo "Release $TAG already exists — skipping."
+            exit 0
+          fi
+          gh release create "$TAG" dist/itvx-black-screen-fix.zip \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "$TAG" \
+            --notes "Download \`itvx-black-screen-fix.zip\` below, unzip it, then load it in Chrome via \`chrome://extensions\` → Developer mode → Load unpacked. See the README for full instructions."

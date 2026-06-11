@@ -45,6 +45,10 @@ That's it — it survives Chrome restarts. Visit https://www.itv.com/watch and t
 | `fix.css` | The automatic anti-overlay filter, injected on `itv.com` |
 | `background.js` | Toolbar-button handler that runs the manual rescue |
 
+## Releasing
+
+Releases are automated. Bump the `version` in `manifest.json` in your PR — when it merges to `main`, the [build workflow](.github/workflows/build.yml) tags `v<version>`, creates a GitHub release, and attaches the packaged zip. Pushes that don't change the version just rebuild the artifact and skip the release.
+
 ## Extending to other sites
 
 The same black-screen bug can affect other DRM streaming sites. To protect them automatically, add their domains to the `matches` array in `manifest.json`, e.g.:
